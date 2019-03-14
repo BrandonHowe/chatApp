@@ -15,19 +15,20 @@
       #namemodaldiv {background-color: #ddd; width: 30%; margin-left: 35%; position: relative; top: 25%; border: solid black 3px; border-radius: 3px; height: 200px;}
       #username {width: 30%; margin-left: 35%; margin-top: 10%;}
       #usernamesubmit {width: 20%; margin-left: 40%; margin-top: 5%; background-color: #aaa; border: solid 2px black; border-radius: 3px; padding: 1px;}
-      #namemodal {display: none;}
+      /* #namemodal {display: none;} */
     </style>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <script src="/path/to/jquery.cookie.js"></script>
-
+    <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script>
-    function usernameSubmit () {
-        let cookieValue = document.getElementById('username');
-        $.cookie("user", cookieValue);
-        document.getElementById('nameModal').style.display = 'none';
-    }
+        function usernameSubmit () {
+            console.log('fun')
+            let cookieValue = document.getElementById('username').value;
+            console.log(cookieValue)
+            $.cookie("user", cookieValue);
+            document.getElementById('namemodal').style.display = 'none';
+        }
     </script>
 
     <script>
