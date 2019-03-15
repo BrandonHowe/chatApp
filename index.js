@@ -15,18 +15,22 @@ app.get('/', function(req,res){
 
 io.on('connection', function (socket){
     console.log("we're connected 😘🤣😊");
-    io.emit('chat message', 'A user has connected!')
+    // io.emit('chat message', 'A user has connected!')
     
-    var cookief = socket.handshake.headers.cookief;
+    socket.on('log in', function(){
+        cookies = cookie.parse(socket.handshake.headers.cookie);
+        console.log(cookies)
+    })
 
-    var cookies = cookie.parse(socket.handshake.headers.cookie);
-
-    console.log(cookies.user);
+    // console.log(cookies.user);
 
     socket.on('chat message', function(msg,id){
+        cookies = cookie.parse(socket.handshake.headers.cookie);
+        console.log("Username: " + cookies.user);
+        theUser = cookies.user;
         console.log(id);
         console.log('message: ' + msg);
-        io.emit('chat message', { msg : msg , user :  cookies.user });
+        io.emit('chat message', { msg : msg , user :  theUser });
     });
 
     socket.on('disconnect', function(){
