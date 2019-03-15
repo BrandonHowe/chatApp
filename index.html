@@ -5,7 +5,7 @@
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px "Courier", Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%}
       form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
       form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
       #messages { list-style-type: none; margin: 0; padding: 0; }
@@ -15,6 +15,14 @@
       #namemodaldiv {background-color: #ddd; width: 30%; margin-left: 35%; position: relative; top: 25%; border: solid black 3px; border-radius: 3px; height: 200px;}
       #username {width: 30%; margin-left: 35%; margin-top: 10%;}
       #usernamesubmit {width: 20%; margin-left: 40%; margin-top: 5%; background-color: #aaa; border: solid 2px black; border-radius: 3px; padding: 1px;}
+
+      #gamemessages { list-style-type: none; margin: 0; padding: 0; }
+      #gamemessages li { padding: 5px 10px; }
+      #gamemessages li:nth-child(odd) { background: #eee; }
+      #gamenamemodal {background-color: #555; z-index: 1; height: 700px;}
+      #gamenamemodaldiv {background-color: #ddd; width: 30%; margin-left: 35%; position: relative; top: 25%; border: solid black 3px; border-radius: 3px; height: 200px;}
+      #gameusername {width: 30%; margin-left: 35%; margin-top: 10%;}
+      #gameusernamesubmit {width: 20%; margin-left: 40%; margin-top: 5%; background-color: #aaa; border: solid 2px black; border-radius: 3px; padding: 1px;}
       /* #namemodal {display: none;} */
     </style>
 
@@ -22,12 +30,22 @@
     <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script>
-        function usernameSubmit () {
+        function usernameSubmit () {""
             console.log('fun')
             let cookieValue = document.getElementById('username').value;
             console.log(cookieValue)
             $.cookie("user", cookieValue);
             document.getElementById('namemodal').style.display = 'none';
+        }
+    </script>
+
+    <script>
+        function gameusernameSubmit () {
+            console.log('fun')
+            let cookieValue = document.getElementById('gameusername').value;
+            console.log(cookieValue)
+            $.cookie("user", cookieValue);
+            document.getElementById('gamenamemodal').style.display = 'none';
         }
     </script>
 
@@ -49,18 +67,50 @@
             });
         });
     </script>
+    <style>
+        .columns {
+            width: 50%;
+            height: 100vh;
+        }
+        .gametown {
+            background-color: lightgoldenrodyellow;
+        }
+        .fullcontainer {
+            display: flex;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
   </head>
   <body>
-    <div id="namemodal">
-        <div id="namemodaldiv">
-            <h2 style="text-align: center; margin-top: 3%;" >Set your username here</h2>
-            <input type="text" name="nickname" id="username"></input>
-            <div id="usernamesubmit" onclick="usernameSubmit()"><h2>Submit</h2></div>
-        </div>
-    </div>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
+      <div class="fullcontainer">
+            <section class="columns">
+                    <div id="namemodal">
+                            <div id="namemodaldiv">
+                                <h2 style="text-align: center; margin-top: 3%;" >Set your username here</h2>
+                                <input type="text" name="nickname" id="username"></input>
+                                <div id="usernamesubmit" onclick="usernameSubmit()"><h2>Sbumit</h2></div>
+                            </div>
+                        </div>
+                        <ul id="messages"></ul>
+                        <form action="">
+                          <input id="m" autocomplete="off" /><button>Send</button>
+                        </form>
+            </section>
+            <Section class="columns gametown">
+                    <div id="gamenamemodal">
+                            <div id="gamenamemodaldiv">
+                                <h2 style="text-align: center; margin-top: 3%;" >Set your username here</h2>
+                                <input type="text" name="nickname" id="gameusername"></input>
+                                <div id="gameusernamesubmit" onclick="gameusernameSubmit()"><h2>Sbumit</h2></div>
+                            </div>
+                        </div>
+                        <ul id="gamemessages"></ul>
+                        <form action="">
+                          <input id="m" autocomplete="off" /><button>Send</button>
+                        </form>
+            </Section>
+      </div>
+
   </body>
 </html>
